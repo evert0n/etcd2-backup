@@ -14,8 +14,16 @@
     "backup",
     "cli"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/evert0n/etcd2-backup.git"
+  },
   "author": "Everton Yoshitani",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/evert0n/etcd2-backup/issues"
+  },
+  "homepage": "https://github.com/evert0n/etcd2-backup#readme",
   "dependencies": {
     "commander": "^2.11.0",
     "request": "^2.81.0",
