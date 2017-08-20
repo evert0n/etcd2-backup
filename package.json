@@ -1,0 +1,25 @@
+{
+  "name": "etcd2-backup",
+  "version": "1.0.1",
+  "description": "etcd v2 backup cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "etcd2-backup": "./index.js"
+  },
+  "keywords": [
+    "etcd",
+    "backup",
+    "cli"
+  ],
+  "author": "Everton Yoshitani",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.11.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "throttled-promise": "^1.0.1"
+  }
+}
