@@ -1,6 +1,6 @@
 # etcd2-backup
 
-etcd v2 backup cli
+A simple backup utility for etcd v2
 
 ## Install
 
