@@ -2,6 +2,8 @@
 
 A simple backup utility for etcd v2
 
+[![Build Status](https://travis-ci.org/evert0n/etcd2-backup.svg?branch=master)](https://travis-ci.org/evert0n/etcd2-backup)
+
 ## Install
 
 ```bash
