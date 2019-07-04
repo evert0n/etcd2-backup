@@ -90,14 +90,14 @@ program
         process.exit(1);
       }
 
-      var keys = [];
+      var configs = [];
 
       var extractFromNodes = function(nodes) {
         nodes.forEach(function(node) {
           if (node.hasOwnProperty('dir') && node.dir === true) {
             extractFromNodes(node.nodes);
           } else if (node.hasOwnProperty('value')) {
-            keys.push({
+            configs.push({
               key: node.key,
               value: node.value
             });
@@ -107,9 +107,9 @@ program
 
       extractFromNodes(body.node.nodes);
 
-      keys = JSON.stringify(keys, null, 2);
+      configs = JSON.stringify(configs, null, 2);
 
-      fs.writeFileSync(file, keys, null, function(err) {
+      fs.writeFileSync(file, configs, null, function(err) {
         if (err) {
           console.error(err);
           process.exit(1);
