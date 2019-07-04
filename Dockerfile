@@ -1,18 +1,16 @@
-FROM node:boron
-
-# Create app directory
-WORKDIR /usr/src/app
+FROM node:10-alpine as builder
 
 # Install app dependencies
-COPY package.json .
-
-# For npm@5 or later, copy package-lock.json as well
-# COPY package.json package-lock.json .
-
+COPY package*.json ./
 RUN npm install
 
+FROM node:10-alpine
+
 # Bundle app source
+# Create app directory
+WORKDIR /usr/src/app
+COPY --from=builder node_modules node_modules
+
 COPY . .
 
 ENTRYPOINT ["node", "/usr/src/app/index.js"]
-CMD []

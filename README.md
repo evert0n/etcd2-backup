@@ -22,7 +22,7 @@ npm install --global etcd2-backup
 
     -V, --version                    output the version number
     -f, --file <file>                backup file
-    -e, --etcd <etcd>                etcd url eg: https://0.0.0.0:4001
+    -e, --etcd <etcd>                etcd url eg: https://host.docker.internal:4001
     -c, --concurrency <concurrency>  max parallel requests
     -h, --help                       output usage information
 
@@ -37,18 +37,18 @@ npm install --global etcd2-backup
 
 ```bash
 # Node
-etcd2-backup -e https://0.0.0.0:4001 -f /backup/backup.json restore
+etcd2-backup -e https://host.docker.internal:4001 -f /backup/backup.json restore
 
 # Docker
-docker run -ti -v /my_backup_dir:/backup evert0n/etcd2-backup -e https://0.0.0.0:4001 -f /backup/backup.json restore
-``` 
+docker run -ti -v /my_backup_dir:/backup evert0n/etcd2-backup -e https://host.docker.internal:4001 -f /backup/backup.json restore
+```
 
 ## Creating a backup file
 
 ```bash
 # Node
-etcd2-backup -e https://0.0.0.0:4001 -f /backup/backup.json dump
+etcd2-backup -e https://host.docker.internal:4001 -f /backup/backup.json dump
 
 # Docker
-docker run -ti -v /my_backup_dir:/backup evert0n/etcd2-backup -e https://0.0.0.0:4001 -f /backup/backup.json dump
-``` 
+docker run -ti -v /my_backup_dir:/backup evert0n/etcd2-backup -e https://host.docker.internal:4001 -f /backup/backup.json dump
+```

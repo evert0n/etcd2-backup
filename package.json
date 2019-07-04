@@ -25,9 +25,9 @@
   },
   "homepage": "https://github.com/evert0n/etcd2-backup#readme",
   "dependencies": {
-    "commander": "^2.11.0",
-    "request": "^2.81.0",
-    "request-promise": "^4.2.1",
+    "commander": "^2.20.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
     "throttled-promise": "^1.0.1"
   }
 }

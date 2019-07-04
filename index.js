@@ -18,24 +18,24 @@ program
   .option('-f, --file <file>', 'backup file')
   .option('-e, --etcd <etcd>', 'etcd url eg: https://0.0.0.0:4001')
   .option('-c, --concurrency <concurrency>', 'max parallel requests')
-  
+
 program
   .command('restore')
   .description('restore keys from backup file')
   .action(function(options) {
-        
+
     var file = options.parent.file || undefined;
     var etcd = options.parent.etcd || 'http://0.0.0.0:4001';
     var concurrency = options.parent.concurrency || 5;
-    
+
     checkFile(file);
-    
+
     var promises = [];
-    
+
     var configs = fs.readFileSync(file).toString();
-    
+
     configs = JSON.parse(configs);
-        
+
     configs.forEach(function(config) {
 
       var options = {
@@ -44,7 +44,7 @@ program
         method: 'put',
         form: { value: config.value }
       }
-      
+
       promises.push(new throttled(function(resolve, reject) {
         console.log('Updating: ' + config.key);
         request(options, function(err, response, body) {
@@ -54,9 +54,9 @@ program
           return resolve(body);
         });
       }));
-      
+
     });
-    
+
     throttled.all(promises, concurrency)
       .then(function(results) {
         console.log('All configs restored')
@@ -84,25 +84,42 @@ program
     }
 
     request(options, function(err, res, body) {
-    
+
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+
+      var keys = [];
+
+      var extractFromNodes = function(nodes) {
+        nodes.forEach(function(node) {
+          if (node.hasOwnProperty('dir') && node.dir === true) {
+            extractFromNodes(node.nodes);
+          } else if (node.hasOwnProperty('value')) {
+            keys.push({
+              key: node.key,
+              value: node.value
+            });
+          }
+        });
+      }
+
+      extractFromNodes(body.node.nodes);
+
+      keys = JSON.stringify(keys, null, 2);
+
+      fs.writeFileSync(file, keys, null, function(err) {
         if (err) {
           console.error(err);
           process.exit(1);
         }
-        
-        var data = JSON.stringify(body, null, 2);
-        
-        fs.writeFileSync(file, data, null, function(err) {
-          if (err) {
-            console.error(err);
-            process.exit(1);
-          }
-        });
-                
+      });
+
     });
-    
+
   });
- 
+
 program.parse(process.argv);
 
 if (!program.args.length) program.help();
