@@ -1,6 +1,6 @@
 {
   "name": "etcd2-backup",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "etcd v2 backup cli",
   "main": "index.js",
   "scripts": {
